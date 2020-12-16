@@ -42,7 +42,7 @@ build_request_urls <- function(base_path, endpoint, query_list = NULL) {
 get_request_content <- function(request_urls, ...) {
   arguments <- list(...)
 
-  d <- purrr::map_dfr(request_urls, ~ request_url_content(.x, arguments = arguments))
+  d <- purrr::map_dfr(request_urls, ~ { request_url_content(.x, arguments = arguments); Sys.sleep(1) })
   d <- format_request_content(d, arguments = arguments)
 
   d
